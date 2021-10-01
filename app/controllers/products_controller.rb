@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        # Publisher.publish("products", @product.attributes)
+        Publisher.publish(queue_name: "happyshop-admin.products", payload: @product.attributes)
         format.html { redirect_to @product, notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
