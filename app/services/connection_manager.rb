@@ -7,7 +7,7 @@ class ConnectionManager
     end
 
     def establish_connection
-        @active_connection = Bunny.new
+        @active_connection = Bunny.new ENV['CLOUDAMQP_URL']
         active_connection.start
         @active_channel = active_connection.create_channel
       
